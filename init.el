@@ -33,20 +33,8 @@
 ;; Auto-Complete
 (require 'auto-complete)
 
-;; Settings
-(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
-(if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
-(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
-(setq temporary-file-directory "~/.emacs-backup")
-(color-theme-sanityinc-tomorrow-bright)
-
-;; Emacs Starter Kit
-(remove-hook 'prog-mode-hook 'esk-turn-on-hl-line-mode)
-(remove-hook 'prog-mode-hook 'esk-pretty-lambdas)
-
-;; Winner Mode
-(winner-mode 1)
-(global-set-key "\C-c\C-_" 'winner-undo)
+;; Clojure
+(add-hook 'clojure-mode-hook (lambda () (paredit-mode +1)))
 
 ;; Emacs Lisp
 (defun ac-sources-elisp ()
@@ -55,11 +43,22 @@
 		     ac-source-functions
 		     ac-source-filename
 		     ac-source-words-in-buffer)))
-
 (add-hook 'emacs-lisp-mode-hook (lambda () (paredit-mode +1)))
 (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
 (add-hook 'emacs-lisp-mode-hook 'auto-complete-mode)
 (add-hook 'emacs-lisp-mode-hook 'ac-sources-elisp)
 
-;; Clojure
-(add-hook 'clojure-mode-hook (lambda () (paredit-mode +1)))
+;; Emacs Starter Kit
+(remove-hook 'prog-mode-hook 'esk-turn-on-hl-line-mode)
+(remove-hook 'prog-mode-hook 'esk-pretty-lambdas)
+
+;; Settings
+(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+(if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+(setq temporary-file-directory "~/.emacs-backup")
+(color-theme-sanityinc-tomorrow-bright)
+
+;; Winner Mode
+(winner-mode 1)
+(global-set-key "\C-c\C-_" 'winner-undo)
