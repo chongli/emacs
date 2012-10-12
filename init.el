@@ -73,7 +73,7 @@
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
-(setq temporary-file-directory "~/.emacs-backup")
+(setq temporary-file-directory "~/.emacs.d/temp")
 (color-theme-sanityinc-tomorrow-bright)
 (global-set-key "\C-x\C-b" 'ibuffer)
 
