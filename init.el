@@ -11,7 +11,6 @@
     auto-complete
     color-theme-sanityinc-tomorrow
     clojure-mode
-    ido
     nrepl
     starter-kit)
   "List of packages to be installed at launch.")
