@@ -34,9 +34,11 @@
 (require 'auto-complete)
 (ac-set-trigger-key "TAB")
 (setq ac-auto-start nil)
+(setq ac-delay 0.5)
 
 ;; Clojure
 (add-hook 'clojure-mode-hook (lambda () (paredit-mode +1)))
+(add-hook 'nrepl-mode-hook (lambda () (enlarge-window -25)))
 
 ;; Emacs Lisp
 (defun ac-sources-elisp ()
