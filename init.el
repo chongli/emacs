@@ -9,7 +9,7 @@
 (defvar packages-list
   '(ac-nrepl
     auto-complete
-    color-theme-sanityinc-solarized
+    color-theme-sanityinc-tomorrow
     clojure-mode
     ido
     nrepl
@@ -39,6 +39,7 @@
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 (setq temporary-file-directory "~/.emacs-backup")
+(color-theme-sanityinc-tomorrow-bright)
 
 ;; Emacs Starter Kit
 (remove-hook 'prog-mode-hook 'esk-turn-on-hl-line-mode)
