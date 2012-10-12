@@ -35,10 +35,23 @@
 (ac-set-trigger-key "TAB")
 (setq ac-auto-start nil)
 (setq ac-delay 0.5)
+(setq ac-menu-height 15)
+(setq ac-use-fuzzy nil)
 
 ;; Clojure
-(add-hook 'clojure-mode-hook (lambda () (paredit-mode +1)))
-(add-hook 'nrepl-mode-hook (lambda () (enlarge-window -25)))
+(add-hook 'clojure-mode-hook
+          (lambda () (paredit-mode +1)))
+(add-hook 'nrepl-mode-hook
+          (lambda () (progn
+                       (paredit-mode +1)
+                       (enlarge-window -25)
+                       (ac-nrepl-setup)
+                       (auto-complete-mode))))
+(add-hook 'nrepl-interaction-mode-hook
+          (lambda () (progn
+                       (ac-nrepl-setup)
+                       (auto-complete-mode))))
+
 
 ;; Emacs Lisp
 (defun ac-sources-elisp ()
