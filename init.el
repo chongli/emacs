@@ -32,6 +32,8 @@
 
 ;; Auto-Complete
 (require 'auto-complete)
+(ac-set-trigger-key "TAB")
+(setq ac-auto-start nil)
 
 ;; Clojure
 (add-hook 'clojure-mode-hook (lambda () (paredit-mode +1)))
