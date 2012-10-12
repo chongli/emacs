@@ -58,6 +58,7 @@
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 (setq temporary-file-directory "~/.emacs-backup")
 (color-theme-sanityinc-tomorrow-bright)
+(global-set-key "\C-x\C-b" 'ibuffer)
 
 ;; Winner Mode
 (winner-mode 1)
