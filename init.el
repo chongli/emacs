@@ -60,7 +60,7 @@
 		     ac-source-functions
 		     ac-source-filename
 		     ac-source-words-in-buffer)))
-(add-hook 'emacs-lisp-mode-hook (lambda () (paredit-mode +1)))
+(add-hook 'emacs-lisp-mode-hook (lambda () (paredit-mode 1)))
 (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
 (add-hook 'emacs-lisp-mode-hook 'auto-complete-mode)
 (add-hook 'emacs-lisp-mode-hook 'ac-sources-elisp)
