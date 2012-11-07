@@ -65,10 +65,6 @@
 (add-hook 'emacs-lisp-mode-hook 'auto-complete-mode)
 (add-hook 'emacs-lisp-mode-hook 'ac-sources-elisp)
 
-;; Emacs Starter Kit
-(remove-hook 'prog-mode-hook 'esk-turn-on-hl-line-mode)
-(remove-hook 'prog-mode-hook 'esk-pretty-lambdas)
-
 ;; ZSH
 (defun ac-sources-zsh ()
   (setq ac-sources '(ac-source-words-in-buffer
@@ -83,9 +79,12 @@
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
-(setq temporary-file-directory "~/.emacs.d/temp")
 (color-theme-sanityinc-tomorrow-bright)
 (global-set-key "\C-x\C-b" 'ibuffer)
+
+;; Emacs Starter Kit
+(remove-hook 'prog-mode-hook 'esk-turn-on-hl-line-mode)
+(remove-hook 'prog-mode-hook 'esk-pretty-lambdas)
 
 ;; Winner Mode
 (winner-mode 1)
