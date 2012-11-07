@@ -69,6 +69,16 @@
 (remove-hook 'prog-mode-hook 'esk-turn-on-hl-line-mode)
 (remove-hook 'prog-mode-hook 'esk-pretty-lambdas)
 
+;; ZSH
+(defun ac-sources-zsh ()
+  (setq ac-sources '(ac-source-words-in-buffer
+                     ac-source-filename)))
+(add-hook 'sh-mode-hook 'auto-complete-mode)
+(add-hook 'sh-mode-hook 'ac-sources-zsh)
+(setq auto-mode-alist (cons '("zshecl" . sh-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.zshrc(.local)?" . sh-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.z?sh" . sh-mode) auto-mode-alist))
+
 ;; Settings
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
