@@ -11,6 +11,7 @@
     auto-complete
     color-theme-sanityinc-tomorrow
     clojure-mode
+    haskell-mode
     nrepl
     starter-kit)
   "List of packages to be installed at launch.")
@@ -64,6 +65,10 @@
 (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
 (add-hook 'emacs-lisp-mode-hook 'auto-complete-mode)
 (add-hook 'emacs-lisp-mode-hook 'ac-sources-elisp)
+
+;; Haskell
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 
 ;; ZSH
 (defun ac-sources-zsh ()
