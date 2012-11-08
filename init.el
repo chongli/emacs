@@ -61,7 +61,12 @@
 		     ac-source-functions
 		     ac-source-filename
 		     ac-source-words-in-buffer)))
-(add-hook 'emacs-lisp-mode-hook (lambda () (paredit-mode 1)))
+(defun turn-on-paredit-mode ()
+  (paredit-mode 1))
+(defun set-newline-and-indent ()
+  (local-set-key (kbd "RET") 'newline-and-indent))
+(add-hook 'emacs-lisp-mode-hook 'set-newline-and-indent)
+(add-hook 'emacs-lisp-mode-hook 'turn-on-paredit-mode)
 (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
 (add-hook 'emacs-lisp-mode-hook 'auto-complete-mode)
 (add-hook 'emacs-lisp-mode-hook 'ac-sources-elisp)
