@@ -31,6 +31,14 @@
     (when (not (package-installed-p p))
       (package-install p))))
 
+;; Utility
+(defun add-hooks (hook fns)
+  (mapcar (apply-partially 'add-hook hook) fns))
+(defun append-to-list (list elems)
+  (mapcar (apply-partially 'add-to-list list) elems))
+(defun turn-on-paredit-mode ()
+  (paredit-mode 1))
+
 ;; Auto-Complete
 (require 'auto-complete)
 (ac-set-trigger-key "TAB")
@@ -40,18 +48,15 @@
 (setq ac-use-fuzzy nil)
 
 ;; Clojure
-(add-hook 'clojure-mode-hook
-          (lambda () (paredit-mode +1)))
-(add-hook 'nrepl-mode-hook
-          (lambda () (progn
-                       (paredit-mode +1)
-                       (enlarge-window -25)
-                       (ac-nrepl-setup)
-                       (auto-complete-mode))))
-(add-hook 'nrepl-interaction-mode-hook
-          (lambda () (progn
-                       (ac-nrepl-setup)
-                       (auto-complete-mode))))
+(defun set-nrepl-window-size ()
+  (enlarge-window -25))
+(add-hook 'clojure-mode-hook 'turn-on-paredit-mode)
+(add-hooks 'nrepl-mode-hook '(turn-on-paredit-mode
+                              set-nrepl-window-size
+                              ac-nrepl-setup
+                              auto-complete-mode))
+(add-hooks 'nrepl-interaction-mode-hook '(ac-nrepl-setup
+                                          auto-complete-mode))
 
 
 ;; Emacs Lisp
@@ -61,29 +66,26 @@
 		     ac-source-functions
 		     ac-source-filename
 		     ac-source-words-in-buffer)))
-(defun turn-on-paredit-mode ()
-  (paredit-mode 1))
 (defun set-newline-and-indent ()
   (local-set-key (kbd "RET") 'newline-and-indent))
-(add-hook 'emacs-lisp-mode-hook 'set-newline-and-indent)
-(add-hook 'emacs-lisp-mode-hook 'turn-on-paredit-mode)
-(add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
-(add-hook 'emacs-lisp-mode-hook 'auto-complete-mode)
-(add-hook 'emacs-lisp-mode-hook 'ac-sources-elisp)
+(add-hooks 'emacs-lisp-mode-hook '(set-newline-and-indent
+                                   turn-on-paredit-mode
+                                   turn-on-eldoc-mode
+                                   auto-complete-mode
+                                   ac-sources-elisp))
 
 ;; Haskell
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
-(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+(add-hooks 'haskell-mode-hook '(turn-on-haskell-indentation
+                                turn-on-haskell-doc-mode))
 
 ;; ZSH
 (defun ac-sources-zsh ()
   (setq ac-sources '(ac-source-words-in-buffer
                      ac-source-filename)))
-(add-hook 'sh-mode-hook 'auto-complete-mode)
-(add-hook 'sh-mode-hook 'ac-sources-zsh)
-(setq auto-mode-alist (cons '("zshecl" . sh-mode) auto-mode-alist))
-(setq auto-mode-alist (cons '("\\.zshrc(.local)?" . sh-mode) auto-mode-alist))
-(setq auto-mode-alist (cons '("\\.z?sh" . sh-mode) auto-mode-alist))
+(add-hooks 'sh-mode-hook '(auto-complete-mode
+                           ac-sources-zsh))
+(append-to-list 'auto-mode-alist '(("zshecl" . sh-mode)
+                                         ("\\.zshrc(.local)?" . sh-mode)))
 
 ;; Settings
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
