@@ -13,6 +13,7 @@
     clojure-mode
     haskell-mode
     nrepl
+    rainbow-delimiters
     starter-kit)
   "List of packages to be installed at launch.")
 
@@ -38,6 +39,8 @@
   (mapcar (apply-partially 'add-to-list list) elems))
 (defun turn-on-paredit-mode ()
   (paredit-mode 1))
+(defun turn-on-rainbow-delimiters ()
+  (rainbow-delimiters-mode 1))
 
 ;; Auto-Complete
 (require 'auto-complete)
@@ -50,7 +53,8 @@
 ;; Clojure
 (defun set-nrepl-window-size ()
   (enlarge-window -25))
-(add-hook 'clojure-mode-hook 'turn-on-paredit-mode)
+(add-hooks 'clojure-mode-hook '(turn-on-paredit-mode
+                                turn-on-rainbow-delimiters))
 (add-hooks 'nrepl-mode-hook '(turn-on-paredit-mode
                               set-nrepl-window-size
                               ac-nrepl-setup
@@ -69,8 +73,9 @@
 (defun set-newline-and-indent ()
   (local-set-key (kbd "RET") 'newline-and-indent))
 (add-hooks 'emacs-lisp-mode-hook '(set-newline-and-indent
-                                   turn-on-paredit-mode
                                    turn-on-eldoc-mode
+                                   turn-on-paredit-mode
+                                   turn-on-rainbow-delimiters
                                    auto-complete-mode
                                    ac-sources-elisp))
 
