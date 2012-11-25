@@ -44,6 +44,8 @@
   (paredit-mode 1))
 (defun turn-on-rainbow-delimiters ()
   (rainbow-delimiters-mode 1))
+(defun set-newline-and-indent ()
+  (local-set-key (kbd "RET") 'newline-and-indent))
 
 ;; Auto-Complete
 (require 'auto-complete)
@@ -56,15 +58,18 @@
 ;; Clojure
 (defun set-nrepl-window-size ()
   (enlarge-window -25))
-(add-hooks 'clojure-mode-hook '(turn-on-paredit-mode
+(defun set-nrepl-popup-stacktraces ()
+  (setq nrepl-popup-stacktraces nil))
+(add-hooks 'clojure-mode-hook '(set-newline-and-indent
+                                turn-on-paredit-mode
                                 turn-on-rainbow-delimiters))
 (add-hooks 'nrepl-mode-hook '(turn-on-paredit-mode
                               set-nrepl-window-size
+                              set-nrepl-popup-stacktraces
                               ac-nrepl-setup
                               auto-complete-mode))
 (add-hooks 'nrepl-interaction-mode-hook '(ac-nrepl-setup
                                           auto-complete-mode))
-
 
 ;; Emacs Lisp
 (defun ac-sources-elisp ()
@@ -73,8 +78,6 @@
 		     ac-source-functions
 		     ac-source-filename
 		     ac-source-words-in-buffer)))
-(defun set-newline-and-indent ()
-  (local-set-key (kbd "RET") 'newline-and-indent))
 (add-hooks 'emacs-lisp-mode-hook '(set-newline-and-indent
                                    turn-on-eldoc-mode
                                    turn-on-paredit-mode
