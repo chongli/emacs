@@ -1,7 +1,9 @@
 (require 'package)
 (package-initialize)
 (add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/"))
+             '("marmalade" . "http://marmalade-repo.org/packages/") t)
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
 (require 'cl)
 
@@ -11,6 +13,7 @@
     auto-complete
     color-theme-sanityinc-tomorrow
     clojure-mode
+    glsl-mode
     haskell-mode
     nrepl
     rainbow-delimiters
@@ -78,7 +81,12 @@
                                    turn-on-rainbow-delimiters
                                    auto-complete-mode
                                    ac-sources-elisp))
-
+;; GLSL
+(autoload 'glsl-mode "glsl-mode" nil t)
+(append-to-list 'auto-mode-alist '(("\\.glsl\\'" . glsl-mode)
+                                   ("\\.vert\\'" . glsl-mode)
+                                   ("\\.frag\\'" . glsl-mode)
+                                   ("\\.geom\\'" . glsl-mode)))
 ;; Haskell
 (add-hooks 'haskell-mode-hook '(turn-on-haskell-indentation
                                 turn-on-haskell-doc-mode))
