@@ -98,7 +98,7 @@
 (add-hooks 'sh-mode-hook '(auto-complete-mode
                            ac-sources-zsh))
 (append-to-list 'auto-mode-alist '(("zshecl" . sh-mode)
-                                         ("\\.zshrc(.local)?" . sh-mode)))
+                                   ("\\.zshrc(.local)?\\'" . sh-mode)))
 
 ;; Settings
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
