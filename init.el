@@ -48,6 +48,8 @@
   (paredit-mode 1))
 (defun turn-on-rainbow-delimiters ()
   (rainbow-delimiters-mode 1))
+(defun turn-on-electric-indentation ()
+  (electric-indent-mode 1))
 (defun set-newline-and-indent ()
   (local-set-key (kbd "RET") 'newline-and-indent))
 
@@ -98,6 +100,8 @@
                                    ("\\.vert\\'" . glsl-mode)
                                    ("\\.frag\\'" . glsl-mode)
                                    ("\\.geom\\'" . glsl-mode)))
+(add-hook 'glsl-mode-hook 'turn-on-electric-indentation)
+
 ;; Haskell
 (add-hooks 'haskell-mode-hook '(turn-on-haskell-indentation
                                 turn-on-haskell-doc-mode))
