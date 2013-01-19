@@ -70,6 +70,8 @@
                               auto-complete-mode))
 (add-hooks 'nrepl-interaction-mode-hook '(ac-nrepl-setup
                                           auto-complete-mode))
+;; Ediff
+(setq ediff-split-window-function 'split-window-horizontally)
 
 ;; Emacs Lisp
 (defun ac-sources-elisp ()
