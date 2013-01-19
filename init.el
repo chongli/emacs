@@ -40,6 +40,8 @@
 ;; Utility
 (defun add-hooks (hook fns)
   (mapcar (apply-partially 'add-hook hook) fns))
+(defun remove-hooks (hook fns)
+  (mapcar (apply-partially 'remove-hook hook) fns))
 (defun append-to-list (list elems)
   (mapcar (apply-partially 'add-to-list list) elems))
 (defun turn-on-paredit-mode ()
@@ -72,6 +74,7 @@
                               auto-complete-mode))
 (add-hooks 'nrepl-interaction-mode-hook '(ac-nrepl-setup
                                           auto-complete-mode))
+
 ;; Ediff
 (setq ediff-split-window-function 'split-window-horizontally)
 
@@ -88,6 +91,7 @@
                                    turn-on-rainbow-delimiters
                                    auto-complete-mode
                                    ac-sources-elisp))
+
 ;; GLSL
 (autoload 'glsl-mode "glsl-mode" nil t)
 (append-to-list 'auto-mode-alist '(("\\.glsl\\'" . glsl-mode)
@@ -115,8 +119,9 @@
 (global-set-key "\C-x\C-b" 'ibuffer)
 
 ;; Emacs Starter Kit
-(remove-hook 'prog-mode-hook 'esk-turn-on-hl-line-mode)
-(remove-hook 'prog-mode-hook 'esk-pretty-lambdas)
+(remove-hooks 'prog-mode-hook '(esk-turn-on-hl-line-mode
+                                idle-highlight-mode
+                                esk-pretty-lambdas))
 
 ;; Winner Mode
 (winner-mode 1)
