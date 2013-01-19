@@ -13,8 +13,10 @@
     auto-complete
     color-theme-sanityinc-tomorrow
     clojure-mode
+    clojurescript-mode
     glsl-mode
     haskell-mode
+    js2-mode
     nrepl
     rainbow-delimiters
     starter-kit)
