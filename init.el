@@ -120,6 +120,7 @@
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 (color-theme-sanityinc-tomorrow-bright)
+(delete-selection-mode 1)
 (global-set-key "\C-x\C-b" 'ibuffer)
 
 ;; Emacs Starter Kit
