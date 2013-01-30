@@ -122,6 +122,8 @@
 (color-theme-sanityinc-tomorrow-bright)
 (delete-selection-mode 1)
 (global-set-key "\C-x\C-b" 'ibuffer)
+(set-default-font "Inconsolata-16")
+(setq visible-bell nil)
 
 ;; Emacs Starter Kit
 (remove-hooks 'prog-mode-hook '(esk-turn-on-hl-line-mode
