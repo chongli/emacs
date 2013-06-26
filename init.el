@@ -107,7 +107,11 @@
 (add-hook 'glsl-mode-hook 'turn-on-electric-indentation)
 
 ;; Haskell
-(add-hooks 'haskell-mode-hook '(turn-on-haskell-indentation
+(add-hooks 'haskell-mode-hook '(turn-on-haskell-doc-mode
+                                turn-on-haskell-indent
+                                turn-on-haskell-indentation
+                                enable-flymake-mode
+                                remove-after-save-handler
                                 turn-on-haskell-doc-mode))
 
 ;; ZSH
@@ -134,6 +138,8 @@
 (remove-hooks 'prog-mode-hook '(esk-turn-on-hl-line-mode
                                 idle-highlight-mode
                                 esk-pretty-lambdas))
+;; Ido Mode
+(setq ido-cannot-complete-command 'ido-next-match)
 
 ;; Winner Mode
 (winner-mode 1)
