@@ -107,12 +107,14 @@
 (add-hook 'glsl-mode-hook 'turn-on-electric-indentation)
 
 ;; Haskell
-(add-hooks 'haskell-mode-hook '(turn-on-haskell-doc-mode
-                                turn-on-haskell-indent
-                                turn-on-haskell-indentation
-                                enable-flymake-mode
-                                remove-after-save-handler
-                                turn-on-haskell-doc-mode))
+(defun turn-on-ghc-mod ()
+  (ghc-init)
+  (flymake-mode-on))
+(add-hooks 'haskell-mode-hook '(turn-on-haskell-indent
+                                turn-on-eldoc-mode
+                                turn-on-haskell-doc-mode
+                                turn-on-haskell-decl-scan
+                                turn-on-ghc-mod))
 
 ;; ZSH
 (defun ac-sources-zsh ()
