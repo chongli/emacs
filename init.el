@@ -5,10 +5,6 @@
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
-(let ((colors "~/.emacs.d/colors"))
-  (add-to-list 'load-path colors)
-  (require 'vivid-chalk))
-
 (require 'cl)
 
 ;; Guarantee all packages are installed on start
@@ -146,8 +142,6 @@
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
-;; (color-theme-sanityinc-tomorrow-bright)
-(vivid-chalk)
 (delete-selection-mode 1)
 (global-set-key "\C-x\C-b" 'ibuffer)
 (set-default-font "Inconsolata-16")
@@ -200,3 +194,16 @@
     ;; Attach callbacks to hooks
     (setq interprogram-cut-function 'xsel-cut-function)
     (setq interprogram-paste-function 'xsel-paste-function)))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-enabled-themes (quote (sanityinc-tomorrow-bright)))
+ '(custom-safe-themes (quote ("1b8d67b43ff1723960eb5e0cba512a2c7a2ad544ddb2533a90101fd1852b426e" default))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
