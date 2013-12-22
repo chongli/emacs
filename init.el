@@ -16,6 +16,7 @@
     clojurescript-mode
     flycheck
     glsl-mode
+    ghc
     haskell-mode
     js2-mode
     nrepl
@@ -117,8 +118,7 @@
 
 ;; Haskell
 (defun turn-on-ghc-mod ()
-  (ghc-init)
-  (flymake-mode-on))
+  (ghc-init))
 (defun turn-on-flycheck ()
   (flycheck-mode 1))
 (add-hooks 'haskell-mode-hook '(set-newline-and-indent
