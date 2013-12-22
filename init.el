@@ -18,6 +18,7 @@
     color-theme-sanityinc-tomorrow
     clojure-mode
     clojurescript-mode
+    flycheck
     glsl-mode
     haskell-mode
     js2-mode
@@ -59,17 +60,29 @@
 
 ;; Auto-Complete
 (require 'auto-complete)
-(ac-set-trigger-key "TAB")
-(setq ac-auto-start nil)
 (setq ac-delay 0.5)
 (setq ac-menu-height 15)
-(setq ac-use-fuzzy nil)
+(setq ac-use-fuzzy 1)
 
 ;; Clojure
 (defun set-nrepl-window-size ()
   (enlarge-window -5))
 (defun set-nrepl-popup-stacktraces ()
   (setq nrepl-popup-stacktraces nil))
+(defun remove-clojurescript-start-cljs-repl ()
+  (remove-hook 'inferior-lisp-mode-hook 'clojurescript-start-cljs-repl))
+(defun rhino-repl ()
+  (interactive)
+  (run-lisp "lein trampoline cljsbuild repl-rhino"))
+(defun node-repl ()
+  (interactive)
+  (clojure-display-inferior-lisp-buffer)
+  (comint-send-string (inferior-lisp-proc) "(require 'cljs.repl 'cljs.repl.node)\n")
+  (comint-send-string (inferior-lisp-proc) "(cljs.repl/repl (cljs.repl.node/repl-env))\n"))
+(defun browser-repl ()
+  (interactive)
+  (run-lisp "lein trampoline cljsbuild repl-launch aurora http://localhost:3000/"))
+(add-hook 'clojurescript-mode-hook 'remove-clojurescript-start-cljs-repl)
 (add-hooks 'clojure-mode-hook '(set-newline-and-indent
                                 turn-on-paredit-mode
                                 turn-on-rainbow-delimiters))
@@ -110,10 +123,14 @@
 (defun turn-on-ghc-mod ()
   (ghc-init)
   (flymake-mode-on))
-(add-hooks 'haskell-mode-hook '(turn-on-haskell-indent
+(defun turn-on-flycheck ()
+  (flycheck-mode 1))
+(add-hooks 'haskell-mode-hook '(set-newline-and-indent
+                                turn-on-haskell-indent
                                 turn-on-eldoc-mode
                                 turn-on-haskell-doc-mode
                                 turn-on-haskell-decl-scan
+                                turn-on-flycheck
                                 turn-on-ghc-mod))
 
 ;; ZSH
