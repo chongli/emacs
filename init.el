@@ -4,7 +4,8 @@
              '("marmalade" . "http://marmalade-repo.org/packages/") t)
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.milkbox.net/packages/") t)
-
+(add-to-list 'load-path
+             "~/.emacs.d/plugin")
 (require 'cl)
 
 ;; Guarantee all packages are installed on start
@@ -16,6 +17,7 @@
     clojurescript-mode
     flycheck
     glsl-mode
+    ghc
     haskell-mode
     js2-mode
     nrepl
@@ -116,9 +118,10 @@
 (add-hook 'glsl-mode-hook 'turn-on-electric-indentation)
 
 ;; Haskell
+(eval-after-load 'flycheck
+  '(require 'flycheck-ghcmod))
 (defun turn-on-ghc-mod ()
-  (ghc-init)
-  (flymake-mode-on))
+  (ghc-init))
 (defun turn-on-flycheck ()
   (flycheck-mode 1))
 (add-hooks 'haskell-mode-hook '(set-newline-and-indent
